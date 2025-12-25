@@ -1,0 +1,42 @@
+{
+  "id": "gen-1765990463-drcHakJKffc25z47Ukyf",
+  "provider": "Amazon Bedrock",
+  "model": "anthropic/claude-3.5-sonnet",
+  "object": "chat.completion",
+  "created": 1765990463,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "length",
+      "native_finish_reason": "length",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"patches\": [\n    {\n      \"file\": \"README.md\",\n      \"patch\": \"# Docr\\n\\nA modern document management application.\\n\\n## Overview\\n\\nDocr is a web-based application for managing and organizing documents, featuring a dynamic repository system.\\n\\n## Features\\n\\n- Repository management\\n- Document organization\\n- Dynamic page routing\\n- Modern React-based interface\\n\\n## Getting Started\\n\\n### Prerequisites\\n\\n- Node.js\\n- npm or yarn\\n\\n### Installation\\n\\n```bash\\ngit clone https://github.com/therealteejay25/Docr.git\\ncd Docr\\nnpm install\\n```\\n\\n### Running the Application\\n\\n```bash\\nnpm run dev\\n```\\n\\nThe application will be available at `http://localhost:3000`\\n\\n## Project Structure\\n\\n```\\napp/\\n  ├── repos/\\n  │   └── [id]/       # Dynamic repository pages\\n  └── ...\\n```\\n\\n## Contributing\\n\\nContributions are welcome! Please feel free to submit a Pull Request.\\n\\n## License\\n\\nThis project is licensed under the MIT License.\\n\",\n      \"reason\": \"Creating a comprehensive README to document the project structure, setup instructions, and basic features\"\n    },\n    {\n      \"file\": \"ARCHITECTURE.md\",\n      \"patch\": \"# Docr Architecture\\n\\n## Overview\\n\\nDocr is built using modern web technologies with a focus on dynamic routing and repository management.\\n\\n## Technical Stack\\n\\n- Next.js/React for frontend\\n- Dynamic routing for repository pages\\n- Modern JavaScript/TypeScript\\n\\n## Key Components\\n\\n### Repository Pages\\n\\nLocation: `app/repos/[id]/page.tsx`\\n\\nHandles individual repository views with dynamic routing based on repository ID.\\n\\n## Data Flow\\n\\n1. User requests repository page\\n2. Dynamic route captures repository ID\\n3. Page component renders repository-specific content\\n\\n## Future Considerations\\n\\n- Authentication system\\n- Document versioning\\n- Search functionality\\n\",\n      \"reason\": \"Adding architectural documentation to explain the technical structure and components\"\n    }\n  ],\n  \"summary\": \"Added comprehensive documentation including README and architecture details, focusing on the repository system and project setup\",\n  \"coverageScore\": 0.8,\n  \"structure",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 453,
+    "completion_tokens": 600,
+    "total_tokens": 1053,
+    "cost": 0.020718,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0.002718,
+      "upstream_inference_completions_cost": 0.018
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

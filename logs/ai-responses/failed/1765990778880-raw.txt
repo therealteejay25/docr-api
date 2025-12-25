@@ -1,0 +1,20 @@
+{
+  "patches": [
+    {
+      "file": "README.md",
+      "patch": "# Docr\n\nA modern software project management tool.\n\n## Overview\n\nDocr is a web-based application built with Next.js that helps manage and organize software projects.\n\n## Features\n\n- Repository management\n- Project documentation\n- Modern UI interface\n\n## Getting Started\n\n### Prerequisites\n\n- Node.js 16+\n- npm or yarn\n\n### Installation\n\n```bash\ngit clone https://github.com/therealteejay25/Docr.git\ncd Docr\nnpm install\n```\n\n### Running the Application\n\n```bash\nnpm run dev\n```\n\nThe application will be available at `http://localhost:3000`\n\n## Project Structure\n\n```\napp/\n  ├── repos/     # Repository management\n  └── ...        # Other application components\n```\n\n## Contributing\n\n1. Fork the repository\n2. Create your feature branch\n3. Submit a pull request\n\n## License\n\nMIT License\n",
+      "reason": "Create comprehensive project documentation with setup instructions and project structure"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "patch": "# Contributing to Docr\n\n## Development Setup\n\n1. Fork the repository\n2. Clone your fork\n3. Install dependencies: `npm install`\n4. Create a feature branch\n5. Make your changes\n6. Submit a pull request\n\n## Code Style\n\n- Use TypeScript\n- Follow existing formatting conventions\n- Write meaningful commit messages\n\n## Testing\n\nRun tests before submitting:\n\n```bash\nnpm test\n```\n\n## Pull Request Process\n\n1. Update documentation if needed\n2. Add tests for new features\n3. Ensure all tests pass\n4. Request review from maintainers\n",
+      "reason": "Add contribution guidelines to help new contributors"
+    }
+  ],
+  "summary": "Added comprehensive documentation including README.md with project setup instructions and CONTRIBUTING.md with contribution guidelines",
+  "coverageScore": 0.8,
+  "structuredDoc": {
+    "sections": [
+      {
+        "title": "Overview",
+        "content

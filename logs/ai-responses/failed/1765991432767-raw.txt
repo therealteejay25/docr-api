@@ -1,0 +1,11 @@
+{
+  "patches": [
+    {
+      "file": "README.md",
+      "patch": "# Docr\n\nA modern documentation management system built with React and TypeScript.\n\n## Overview\n\nDocr helps teams create, manage and share project documentation efficiently. It features a dashboard-based interface with project cards for easy organization.\n\n## Features\n\n- Project dashboard with card-based organization\n- TypeScript support\n- Modern React components\n- Responsive design\n\n## Getting Started\n\n### Prerequisites\n\n- Node.js 14+\n- npm or yarn\n\n### Installation\n\n```bash\nnpm install\n# or\nyarn install\n```\n\n### Running the Development Server\n\n```bash\nnpm run dev\n# or\nyarn dev\n```\n\n## Project Structure\n\n```\n├── components/\n│   └── dashboard/\n│       └── ProjectCard.tsx   # Project card component\n├── pages/\n└── public/\n```\n\n## Contributing\n\n1. Fork the repository\n2. Create your feature branch\n3. Commit your changes\n4. Push to the branch\n5. Create a new Pull Request\n\n## License\n\nMIT License\n",
+      "reason": "Create comprehensive README with project overview, setup instructions, and structure"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "patch": "# Contributing to Docr\n\n## Development Setup\n\n1. Fork and clone the repository\n2. Install dependencies: `npm install`\n3. Start development server: `npm run dev`\n\n## Component Guidelines\n\n### ProjectCard Component\n\nThe ProjectCard component (`components/dashboard/ProjectCard.tsx`) is used to display project information on the dashboard. When modifying:\n\n- Maintain TypeScript type safety\n- Follow existing styling patterns\n- Add proper documentation for props\n- Include unit tests for new functionality\n\n## Pull Request Process\n\n1. Update documentation as needed\n2. Add tests for new features\n3. Ensure all tests pass\n4. Update the README if needed\n5. Request review from maintainers\n\n## Code Style\n\n- Use TypeScript\n- Follow existing formatting patterns\n- Use meaningful component and variable names\n- Add comments for complex logic\n",
+      "reason":

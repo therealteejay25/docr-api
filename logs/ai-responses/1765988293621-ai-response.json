@@ -1,0 +1,42 @@
+{
+  "id": "gen-1765988286-BkhkEEaF7rSicfjxUw0R",
+  "provider": "Amazon Bedrock",
+  "model": "anthropic/claude-3.5-sonnet",
+  "object": "chat.completion",
+  "created": 1765988286,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "stop",
+      "native_finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"patches\": [{\n    \"file\": \"README.md\",\n    \"patch\": \"# Docr\\n\\nA software project for managing repositories.\\n\\n## Features\\n- Repository management interface\\n- React-based frontend\\n- Next.js implementation\\n\\n## Repository Page\\nThe repository page (`app/repos/page.tsx`) provides an interface for viewing and managing repositories.\\n\\n## Getting Started\\n1. Clone the repository\\n2. Install dependencies with `npm install`\\n3. Run the development server with `npm run dev`\\n\\n## Technologies\\n- Next.js\\n- React\\n- TypeScript\",\n    \"reason\": \"Adding basic project documentation since commit message is unclear\"\n  }],\n  \"summary\": \"Added basic documentation structure with project overview, features, and setup instructions\",\n  \"coverageScore\": 0.6,\n  \"structuredDoc\": {\n    \"sections\": [\n      {\n        \"title\": \"Overview\",\n        \"content\": \"Docr is a software project focused on repository management with a modern web interface.\",\n        \"type\": \"introduction\"\n      },\n      {\n        \"title\": \"Setup\",\n        \"content\": \"Instructions for installing and running the project locally using npm.\",\n        \"type\": \"guide\"\n      },\n      {\n        \"title\": \"Features\",\n        \"content\": \"Core features including repository management and React-based interface.\",\n        \"type\": \"features\"\n      }\n    ]\n  }\n}",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 246,
+    "completion_tokens": 353,
+    "total_tokens": 599,
+    "cost": 0.012066,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0.001476,
+      "upstream_inference_completions_cost": 0.01059
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}

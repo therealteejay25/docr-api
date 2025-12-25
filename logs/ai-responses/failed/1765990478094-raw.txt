@@ -1,0 +1,16 @@
+{
+  "patches": [
+    {
+      "file": "README.md",
+      "patch": "# Docr\n\nA modern document management application.\n\n## Overview\n\nDocr is a web-based application for managing and organizing documents, featuring a dynamic repository system.\n\n## Features\n\n- Repository management\n- Document organization\n- Dynamic page routing\n- Modern React-based interface\n\n## Getting Started\n\n### Prerequisites\n\n- Node.js\n- npm or yarn\n\n### Installation\n\n```bash\ngit clone https://github.com/therealteejay25/Docr.git\ncd Docr\nnpm install\n```\n\n### Running the Application\n\n```bash\nnpm run dev\n```\n\nThe application will be available at `http://localhost:3000`\n\n## Project Structure\n\n```\napp/\n  ├── repos/\n  │   └── [id]/       # Dynamic repository pages\n  └── ...\n```\n\n## Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request.\n\n## License\n\nThis project is licensed under the MIT License.\n",
+      "reason": "Creating a comprehensive README to document the project structure, setup instructions, and basic features"
+    },
+    {
+      "file": "ARCHITECTURE.md",
+      "patch": "# Docr Architecture\n\n## Overview\n\nDocr is built using modern web technologies with a focus on dynamic routing and repository management.\n\n## Technical Stack\n\n- Next.js/React for frontend\n- Dynamic routing for repository pages\n- Modern JavaScript/TypeScript\n\n## Key Components\n\n### Repository Pages\n\nLocation: `app/repos/[id]/page.tsx`\n\nHandles individual repository views with dynamic routing based on repository ID.\n\n## Data Flow\n\n1. User requests repository page\n2. Dynamic route captures repository ID\n3. Page component renders repository-specific content\n\n## Future Considerations\n\n- Authentication system\n- Document versioning\n- Search functionality\n",
+      "reason": "Adding architectural documentation to explain the technical structure and components"
+    }
+  ],
+  "summary": "Added comprehensive documentation including README and architecture details, focusing on the repository system and project setup",
+  "coverageScore": 0.8,
+  "structure

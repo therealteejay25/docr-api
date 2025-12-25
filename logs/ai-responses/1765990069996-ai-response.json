@@ -1,0 +1,42 @@
+{
+  "id": "gen-1765990054-DmQUcNBVsecDiMFLH3td",
+  "provider": "Amazon Bedrock",
+  "model": "anthropic/claude-3.5-sonnet",
+  "object": "chat.completion",
+  "created": 1765990054,
+  "choices": [
+    {
+      "logprobs": null,
+      "finish_reason": "length",
+      "native_finish_reason": "length",
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"patches\": [\n    {\n      \"file\": \"README.md\",\n      \"patch\": \"# Docr\\n\\nDocr is a software project management and documentation tool.\\n\\n## Features\\n\\n- Project dashboard view\\n- GitHub repository integration\\n- Project details and documentation management\\n\\n## Getting Started\\n\\n### Prerequisites\\n\\n- Node.js\\n- npm or yarn\\n\\n### Installation\\n\\n1. Clone the repository\\n```bash\\ngit clone https://github.com/therealteejay25/Docr.git\\ncd Docr\\n```\\n\\n2. Install dependencies\\n```bash\\nnpm install\\n# or\\nyarn install\\n```\\n\\n3. Run the development server\\n```bash\\nnpm run dev\\n# or\\nyarn dev\\n```\\n\\n## Project Structure\\n\\n- `/app` - Next.js application routes\\n  - `/project/[id]` - Project detail pages\\n  - `/repos` - Repository management\\n- `/components` - Reusable React components\\n  - `/dashboard` - Dashboard-specific components\\n\\n## Contributing\\n\\nContributions are welcome! Please feel free to submit a Pull Request.\\n\\n## License\\n\\nThis project is licensed under the MIT License.\\n\",\n      \"reason\": \"Create comprehensive README with project overview, setup instructions, and structure\"\n    },\n    {\n      \"file\": \"ARCHITECTURE.md\",\n      \"patch\": \"# Docr Architecture\\n\\n## Overview\\n\\nDocr is built using Next.js and follows a modern React-based architecture.\\n\\n## Key Components\\n\\n### Project Card Component\\n\\nLocation: `components/dashboard/ProjectCard.tsx`\\n- Displays project information in a card format\\n- Handles project navigation and basic interactions\\n\\n### Project Detail Page\\n\\nLocation: `app/app/project/[id]/page.tsx`\\n- Displays detailed project information\\n- Manages project documentation and settings\\n\\n### Repository Management\\n\\nLocation: `app/app/repos/page.tsx`\\n- Handles GitHub repository integration\\n- Manages repository listing and selection\\n\\n## Data Flow\\n\\n1. User interactions trigger component-level state changes\\n2. API calls handle data persistence\\n3. Server-side rendering provides initial state\\n\\n## Technology Stack\\n\\n- Next.js for the framework\\n- React for UI",
+        "refusal": null,
+        "reasoning": null
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 471,
+    "completion_tokens": 600,
+    "total_tokens": 1071,
+    "cost": 0.020826,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": null,
+      "upstream_inference_prompt_cost": 0.002826,
+      "upstream_inference_completions_cost": 0.018
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0
+    }
+  }
+}
