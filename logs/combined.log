@@ -8914,3 +8914,147 @@
 2025-12-25T11:50:06.649Z [32minfo[39m Redis ready
 2025-12-25T11:50:07.288Z [32minfo[39m Ingress established at: https://1a63b94ca069.ngrok-free.app
 2025-12-25T11:50:08.381Z [32minfo[39m MongoDB connection established
+2025-12-25T11:51:29.175Z [32minfo[39m All workers initialized
+2025-12-25T11:51:29.414Z [32minfo[39m All background workers started
+2025-12-25T11:51:29.931Z [32minfo[39m [development] Express server listening on http://localhost:9000
+2025-12-25T11:51:29.933Z [32minfo[39m API vv1: /api/v1/
+2025-12-25T11:51:29.959Z [32minfo[39m Health checks: http://localhost:9000/health/live
+2025-12-25T11:51:30.825Z [32minfo[39m Redis connecting
+2025-12-25T11:51:31.065Z [32minfo[39m Redis ready
+2025-12-25T11:51:31.857Z [32minfo[39m Ingress established at: https://5a0878a46bd6.ngrok-free.app
+2025-12-25T11:51:32.816Z [32minfo[39m MongoDB connection established
+2025-12-25T11:54:45.088Z [32minfo[39m Webhook payload received
+2025-12-25T11:54:45.598Z [32minfo[39m Job added to queue
+2025-12-25T11:54:45.785Z [32minfo[39m Webhook processed
+2025-12-25T11:54:45.795Z [32minfo[39m [c4e7b1e2-2d31-41ec-8ac3-5e7e67f48793] POST /github - 200 (1122ms)
+2025-12-25T11:54:45.836Z [32minfo[39m Processing commit
+2025-12-25T11:54:46.169Z [32minfo[39m Published event
+2025-12-25T11:54:47.899Z [32minfo[39m Commit data fetched
+2025-12-25T11:54:48.779Z [32minfo[39m Commit diff fetched
+2025-12-25T11:54:50.252Z [32minfo[39m Job added to queue
+2025-12-25T11:54:50.701Z [32minfo[39m Generating documentation
+2025-12-25T11:54:50.879Z [32minfo[39m DocGenerator: Building context...
+2025-12-25T11:54:51.127Z [32minfo[39m Commit processed successfully
+2025-12-25T11:54:51.406Z [32minfo[39m Job completed
+2025-12-25T11:54:51.407Z [32minfo[39m Process commit job completed
+2025-12-25T11:54:54.826Z [32minfo[39m DocGenerator: Calling AI service...
+2025-12-25T11:54:54.827Z [32minfo[39m Generating AI completion
+2025-12-25T11:54:56.076Z [31merror[39m AI completion failed
+2025-12-25T11:54:56.079Z [31merror[39m Generate docs job failed
+2025-12-25T11:54:57.020Z [31merror[39m Generate docs job failed
+2025-12-25T11:55:00.236Z [32minfo[39m Generating documentation
+2025-12-25T11:55:00.408Z [32minfo[39m DocGenerator: Building context...
+2025-12-25T11:55:04.877Z [32minfo[39m DocGenerator: Calling AI service...
+2025-12-25T11:55:04.878Z [32minfo[39m Generating AI completion
+2025-12-25T11:55:06.142Z [31merror[39m AI completion failed
+2025-12-25T11:55:06.143Z [31merror[39m Generate docs job failed
+2025-12-25T11:55:06.946Z [31merror[39m Generate docs job failed
+2025-12-25T11:55:13.380Z [32minfo[39m Generating documentation
+2025-12-25T11:55:13.560Z [32minfo[39m DocGenerator: Building context...
+2025-12-25T11:55:18.256Z [32minfo[39m DocGenerator: Calling AI service...
+2025-12-25T11:55:18.310Z [32minfo[39m Generating AI completion
+2025-12-25T11:55:19.647Z [31merror[39m AI completion failed
+2025-12-25T11:55:19.742Z [31merror[39m Generate docs job failed
+2025-12-25T11:55:20.538Z [31merror[39m Generate docs job failed
+2025-12-25T11:56:56.896Z [32minfo[39m All workers initialized
+2025-12-25T11:56:56.969Z [32minfo[39m All background workers started
+2025-12-25T11:56:57.054Z [32minfo[39m [development] Express server listening on http://localhost:9000
+2025-12-25T11:56:57.057Z [32minfo[39m API vv1: /api/v1/
+2025-12-25T11:56:57.059Z [32minfo[39m Health checks: http://localhost:9000/health/live
+2025-12-25T11:56:57.921Z [32minfo[39m Redis connecting
+2025-12-25T11:56:58.151Z [32minfo[39m Redis ready
+2025-12-25T11:56:58.755Z [32minfo[39m Ingress established at: https://2abb85a6f804.ngrok-free.app
+2025-12-25T11:56:59.473Z [32minfo[39m MongoDB connection established
+2025-12-25T11:57:41.749Z [32minfo[39m Webhook payload received
+2025-12-25T11:57:42.227Z [32minfo[39m Job added to queue
+2025-12-25T11:57:42.429Z [32minfo[39m Webhook processed
+2025-12-25T11:57:42.445Z [32minfo[39m [556ada0b-09d0-4c71-bfb3-69eb7a97079f] POST /github - 200 (944ms)
+2025-12-25T11:57:42.719Z [32minfo[39m Processing commit
+2025-12-25T11:57:42.987Z [32minfo[39m Published event
+2025-12-25T11:57:44.615Z [32minfo[39m Commit data fetched
+2025-12-25T11:57:45.200Z [32minfo[39m Commit diff fetched
+2025-12-25T11:57:46.518Z [32minfo[39m Job added to queue
+2025-12-25T11:57:46.799Z [32minfo[39m Generating documentation
+2025-12-25T11:57:46.980Z [32minfo[39m DocGenerator: Building context...
+2025-12-25T11:57:47.218Z [32minfo[39m Commit processed successfully
+2025-12-25T11:57:47.483Z [32minfo[39m Process commit job completed
+2025-12-25T11:57:47.492Z [32minfo[39m Job completed
+2025-12-25T11:57:51.288Z [32minfo[39m DocGenerator: Calling AI service...
+2025-12-25T11:57:51.334Z [32minfo[39m Generating AI completion
+2025-12-25T11:57:52.534Z [31merror[39m AI completion failed
+2025-12-25T11:57:52.536Z [31merror[39m Generate docs job failed
+2025-12-25T11:57:53.326Z [31merror[39m Generate docs job failed
+2025-12-25T11:57:56.822Z [32minfo[39m Generating documentation
+2025-12-25T11:57:56.992Z [32minfo[39m DocGenerator: Building context...
+2025-12-25T11:58:01.406Z [32minfo[39m DocGenerator: Calling AI service...
+2025-12-25T11:58:01.455Z [32minfo[39m Generating AI completion
+2025-12-25T11:58:02.307Z [31merror[39m AI completion failed
+2025-12-25T11:58:02.308Z [31merror[39m Generate docs job failed
+2025-12-25T11:58:03.075Z [31merror[39m Generate docs job failed
+2025-12-25T11:58:18.410Z [32minfo[39m All workers initialized
+2025-12-25T11:58:18.457Z [32minfo[39m All background workers started
+2025-12-25T11:58:18.490Z [32minfo[39m [development] Express server listening on http://localhost:9000
+2025-12-25T11:58:18.492Z [32minfo[39m API vv1: /api/v1/
+2025-12-25T11:58:18.493Z [32minfo[39m Health checks: http://localhost:9000/health/live
+2025-12-25T11:58:19.185Z [32minfo[39m Redis connecting
+2025-12-25T11:58:19.433Z [32minfo[39m Redis ready
+2025-12-25T11:58:19.900Z [32minfo[39m Ingress established at: https://a5861019aa11.ngrok-free.app
+2025-12-25T11:58:20.594Z [32minfo[39m Generating documentation
+2025-12-25T11:58:21.307Z [32minfo[39m MongoDB connection established
+2025-12-25T11:58:22.291Z [32minfo[39m DocGenerator: Building context...
+2025-12-25T11:58:27.943Z [32minfo[39m DocGenerator: Calling AI service...
+2025-12-25T11:58:27.944Z [32minfo[39m Generating AI completion
+2025-12-25T11:58:53.758Z [31merror[39m AI completion failed
+2025-12-25T11:58:53.758Z [31merror[39m Generate docs job failed
+2025-12-25T11:58:55.704Z [31merror[39m Generate docs job failed
+2025-12-25T11:59:31.996Z [32minfo[39m All workers initialized
+2025-12-25T11:59:32.108Z [32minfo[39m All background workers started
+2025-12-25T11:59:32.420Z [32minfo[39m [development] Express server listening on http://localhost:9000
+2025-12-25T11:59:32.504Z [32minfo[39m API vv1: /api/v1/
+2025-12-25T11:59:32.515Z [32minfo[39m Health checks: http://localhost:9000/health/live
+2025-12-25T11:59:33.103Z [32minfo[39m Redis connecting
+2025-12-25T11:59:33.349Z [32minfo[39m Redis ready
+2025-12-25T11:59:34.070Z [32minfo[39m Ingress established at: https://433842b38c55.ngrok-free.app
+2025-12-25T11:59:35.226Z [32minfo[39m MongoDB connection established
+2025-12-25T11:59:57.491Z [32minfo[39m All workers initialized
+2025-12-25T11:59:57.525Z [32minfo[39m All background workers started
+2025-12-25T11:59:57.567Z [32minfo[39m [development] Express server listening on http://localhost:9000
+2025-12-25T11:59:57.567Z [32minfo[39m API vv1: /api/v1/
+2025-12-25T11:59:57.568Z [32minfo[39m Health checks: http://localhost:9000/health/live
+2025-12-25T11:59:58.501Z [32minfo[39m Redis connecting
+2025-12-25T11:59:58.757Z [32minfo[39m Redis ready
+2025-12-25T11:59:59.235Z [32minfo[39m Ingress established at: https://b705bc09ae1e.ngrok-free.app
+2025-12-25T11:59:59.920Z [32minfo[39m MongoDB connection established
+2025-12-25T12:00:25.490Z [32minfo[39m Webhook payload received
+2025-12-25T12:00:27.138Z [32minfo[39m Job added to queue
+2025-12-25T12:00:27.363Z [32minfo[39m Processing commit
+2025-12-25T12:00:27.498Z [32minfo[39m Webhook processed
+2025-12-25T12:00:27.504Z [32minfo[39m [ff50f98b-0773-476a-aaaf-dee6175708d0] POST /github - 200 (2248ms)
+2025-12-25T12:00:27.606Z [32minfo[39m Published event
+2025-12-25T12:00:28.922Z [32minfo[39m Commit data fetched
+2025-12-25T12:00:29.820Z [32minfo[39m Commit diff fetched
+2025-12-25T12:00:31.082Z [32minfo[39m Job added to queue
+2025-12-25T12:00:31.535Z [32minfo[39m Generating documentation
+2025-12-25T12:00:31.706Z [32minfo[39m DocGenerator: Building context...
+2025-12-25T12:00:31.801Z [32minfo[39m Commit processed successfully
+2025-12-25T12:00:32.057Z [32minfo[39m Process commit job completed
+2025-12-25T12:00:32.082Z [32minfo[39m Job completed
+2025-12-25T12:00:36.280Z [32minfo[39m DocGenerator: Calling AI service...
+2025-12-25T12:00:36.281Z [32minfo[39m Generating AI completion
+2025-12-25T12:00:47.380Z [31merror[39m AI completion failed
+2025-12-25T12:00:47.391Z [31merror[39m Generate docs job failed
+2025-12-25T12:00:48.129Z [31merror[39m Generate docs job failed
+2025-12-25T12:00:51.571Z [32minfo[39m Generating documentation
+2025-12-25T12:00:51.754Z [32minfo[39m DocGenerator: Building context...
+2025-12-25T12:00:56.257Z [32minfo[39m DocGenerator: Calling AI service...
+2025-12-25T12:00:56.257Z [32minfo[39m Generating AI completion
+2025-12-25T12:01:06.652Z [31merror[39m AI completion failed
+2025-12-25T12:01:06.655Z [31merror[39m Generate docs job failed
+2025-12-25T12:01:07.381Z [31merror[39m Generate docs job failed
+2025-12-25T12:01:13.928Z [32minfo[39m Generating documentation
+2025-12-25T12:01:14.094Z [32minfo[39m DocGenerator: Building context...
+2025-12-25T12:01:18.418Z [32minfo[39m DocGenerator: Calling AI service...
+2025-12-25T12:01:18.418Z [32minfo[39m Generating AI completion
+2025-12-25T12:01:20.839Z [31merror[39m AI completion failed
+2025-12-25T12:01:20.840Z [31merror[39m Generate docs job failed
+2025-12-25T12:01:21.562Z [31merror[39m Generate docs job failed

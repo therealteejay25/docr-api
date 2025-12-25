@@ -1,0 +1,34 @@
+{
+  "patches": [
+    {
+      "file": "README.md",
+      "patch": "# docr\n\nA software project for managing repositories.\n\n## Overview\n\nDocr is a web application that provides repository management capabilities.\n\n## Features\n\n- Repository listing and management\n- Web-based interface\n- Modern React/Next.js architecture\n\n## Getting Started\n\n### Prerequisites\n\n- Node.js 16+\n- npm or yarn\n\n### Installation\n\n```bash\nnpm install\n# or\nyarn install\n```\n\n### Running the Application\n\n```bash\nnpm run dev\n# or\nyarn dev\n```\n\nThe application will be available at `http://localhost:3000`\n\n## Project Structure\n\n```\napp/\n  ├── repos/     # Repository management pages\n  └── ...        # Other application pages\n```\n\n## Contributing\n\nContributions are welcome! Please feel free to submit a Pull Request.\n\n## License\n\nThis project is licensed under the MIT License.\n",
+      "reason": "Update README with basic project information, setup instructions, and structure"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "patch": "# Contributing to docr\n\n## Development Setup\n\n1. Fork the repository\n2. Clone your fork\n3. Install dependencies: `npm install`\n4. Create a new branch: `git checkout -b feature/your-feature`\n5. Make your changes\n6. Submit a pull request\n\n## Code Style\n\n- Follow existing code formatting\n- Write meaningful commit messages\n- Include tests for new features\n\n## Pull Request Process\n\n1. Update documentation if needed\n2. Ensure all tests pass\n3. Request review from maintainers\n\n## Questions?\n\nFeel free to open an issue for any questions or concerns.\n",
+      "reason": "Add contributing guidelines to help new contributors"
+    }
+  ],
+  "summary": "Added comprehensive documentation including README and contributing guidelines",
+  "coverageScore": 0.8,
+  "structuredDoc": {
+    "sections": [
+      {
+        "title": "Overview",
+        "content": "Docr is a web application for managing repositories with a modern React/Next.js architecture.",
+        "type": "introduction"
+      },
+      {
+        "title": "Setup",
+        "content": "Instructions for installing and running the application locally using Node.js and npm/yarn.",
+        "type": "guide"
+      },
+      {
+        "title": "Project Structure",
+        "content": "Overview of the main application directories and their purposes.",
+        "type": "reference"
+      },
+      {
+        "title": "Contributing",

@@ -82,7 +82,7 @@ export class AIService {
    */
   public async generateCompletion(
     messages: any[],
-    model: string = "anthropic/claude-3.5-sonnet"
+    model: string = "google/gemini-2.0-flash-001"
   ): Promise<any> {
     try {
       logger.info("Generating AI completion", { model });
@@ -90,7 +90,7 @@ export class AIService {
       const response = await this.client.chat.completions.create({
         model,
         temperature: 0,
-        max_tokens: 4000,
+        max_tokens: 8000,
         response_format: { type: "json_object" },
         messages,
       } as any);
@@ -104,7 +104,12 @@ export class AIService {
         throw new Error("No content in AI response");
       }
 
-      // Log raw response for debugging (keeping existing helpful logging)
+      // Log raw response for debugging
+      console.log("=== AI RESPONSE START ===");
+      console.log("Response length:", rawContentStr.length);
+      console.log("Raw AI Response:", rawContentStr);
+      console.log("=== AI RESPONSE END ===");
+      
       this.logRawResponse(rawContentStr);
 
       // Parse JSON
