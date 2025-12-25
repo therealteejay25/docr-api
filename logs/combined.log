@@ -8905,3 +8905,12 @@
 2025-12-23T17:38:43.837Z [32minfo[39m Ingress established at: https://8b25b247a1b4.ngrok-free.app
 2025-12-23T17:38:44.173Z [32minfo[39m Redis ready
 2025-12-23T17:38:46.146Z [32minfo[39m MongoDB connection established
+2025-12-25T11:50:05.562Z [32minfo[39m All workers initialized
+2025-12-25T11:50:05.611Z [32minfo[39m All background workers started
+2025-12-25T11:50:05.697Z [32minfo[39m [development] Express server listening on http://localhost:9000
+2025-12-25T11:50:05.729Z [32minfo[39m API vv1: /api/v1/
+2025-12-25T11:50:05.731Z [32minfo[39m Health checks: http://localhost:9000/health/live
+2025-12-25T11:50:06.405Z [32minfo[39m Redis connecting
+2025-12-25T11:50:06.649Z [32minfo[39m Redis ready
+2025-12-25T11:50:07.288Z [32minfo[39m Ingress established at: https://1a63b94ca069.ngrok-free.app
+2025-12-25T11:50:08.381Z [32minfo[39m MongoDB connection established

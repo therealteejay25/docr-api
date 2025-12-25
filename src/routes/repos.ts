@@ -16,7 +16,7 @@ router.get("/list", listRepos);
 router.post("/connect", connectRepo);
 router.delete("/:repoId", disconnectRepo);
 router.get("/", getRepos);
-router.patch("/:repoId/settings", updateRepoSettings);
+router.patch("/:repoId/setting", updateRepoSettings);
 
 export default router;
 
