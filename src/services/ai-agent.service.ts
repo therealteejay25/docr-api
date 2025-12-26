@@ -8,7 +8,7 @@ import { Repo } from "../models/Repo";
 import { Job } from "../models/Job";
 import { WebhookEvent } from "../models/WebhookEvent";
 import { User } from "../models/User";
-import { processCommitQueue, generateDocsQueue, addJob } from "../lib/queue";
+import { processCommitQueue, addJob } from "../lib/queue";
 
 export interface AgentRequest {
   userId: string;
@@ -164,8 +164,8 @@ export class AIAgentService {
         for (let i = 0; i < message.tool_calls.length; i++) {
           const toolCall = message.tool_calls[i];
           const stepNum = i + 1;
-          const toolName = toolCall.function.name;
-          const toolArgs = JSON.parse(toolCall.function.arguments);
+          const toolName = toolCall.type === "function" ? toolCall.function.name : (toolCall as any).function?.name;
+          const toolArgs = toolCall.type === "function" ? JSON.parse(toolCall.function.arguments) : JSON.parse((toolCall as any).function?.arguments || "{}");
 
           // Check if action needs confirmation
           const needsConfirmation = this.requiresConfirmation(
@@ -265,16 +265,17 @@ export class AIAgentService {
                 message: this.getResultMessage(toolName, result),
               }),
             });
-          } catch (error) {
+          } catch (error: unknown) {
+            const errorMessage = error instanceof Error ? error.message : "Unknown error";
             logger.error("Tool execution failed", {
               tool: toolName,
-              error: error.message,
+              error: errorMessage,
             });
 
             actions.push({
               type: toolName,
               description: stepDescription,
-              result: { error: error.message },
+              result: { error: errorMessage },
               status: "failed",
             });
 
@@ -286,7 +287,7 @@ export class AIAgentService {
                 type: toolName,
                 status: "failed",
                 description: stepDescription,
-                error: error.message,
+                error: errorMessage,
               },
               timestamp: Date.now(),
             });
@@ -296,8 +297,8 @@ export class AIAgentService {
               tool_call_id: toolCall.id,
               content: JSON.stringify({
                 success: false,
-                error: error.message,
-                message: `I encountered an error: ${error.message}. Let me know if you'd like me to try a different approach.`,
+                error: errorMessage,
+                message: `I encountered an error: ${errorMessage}. Let me know if you'd like me to try a different approach.`,
               }),
             });
           }
@@ -365,18 +366,19 @@ export class AIAgentService {
         actions,
         steps,
       };
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("AI agent request failed", {
-        error: error.message,
+        error: errorMessage,
         request,
       });
 
-      const errorMessage = `I'm sorry, I encountered an error while processing your request: ${error.message}. Please try again or rephrase your request.`;
+      const userErrorMessage = `I'm sorry, I encountered an error while processing your request: ${errorMessage}. Please try again or rephrase your request.`;
 
       if (onStream) {
         onStream({
           type: "error",
-          data: { message: errorMessage, error: error.message },
+          data: { message: userErrorMessage, error: errorMessage },
           timestamp: Date.now(),
         });
       }
@@ -385,7 +387,7 @@ export class AIAgentService {
     }
   }
 
-  private requiresConfirmation(toolName: string, args: any): boolean {
+  private requiresConfirmation(toolName: string, _args: any): boolean {
     const criticalActions = [
       "disconnect_repository",
       "update_github_file",

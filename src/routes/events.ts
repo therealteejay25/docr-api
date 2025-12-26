@@ -19,16 +19,17 @@ router.get("/:repoId", async (req: Request, res: Response) => {
 
   const channel = `events:${repoId}`;
 
-  const handleMessage = (channelName: string, message: string) => {
+  const handleMessage = (_channelName: string, message: string) => {
     try {
       res.write(`event: message\n`);
       res.write(`data: ${message}\n\n`);
-    } catch (err) {
-      logger.warn("Failed to write SSE message", { error: err.message });
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "Unknown error";
+      logger.warn("Failed to write SSE message", { error: errorMessage });
     }
   };
 
-  sub.subscribe(channel, (err, count) => {
+  sub.subscribe(channel, (err, _count) => {
     if (err) {
       logger.error("Failed to subscribe to events channel", {
         err: err.message,

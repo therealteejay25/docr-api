@@ -3,7 +3,7 @@ import { AuthRequest } from "../middleware/auth";
 import { Job } from "../models/Job";
 import { logger } from "../lib/logger";
 
-export const getJob = async (req: AuthRequest, res: Response) => {
+export const getJob = async (req: AuthRequest, res: Response): Promise<Response> => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -25,14 +25,15 @@ export const getJob = async (req: AuthRequest, res: Response) => {
       }
     }
 
-    res.json({ job });
-  } catch (error: any) {
-    logger.error("Failed to get job", { error: error.message });
-    res.status(500).json({ error: "Failed to fetch job" });
+    return res.json({ job });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    logger.error("Failed to get job", { error: errorMessage });
+    return res.status(500).json({ error: "Failed to fetch job" });
   }
 };
 
-export const getJobs = async (req: AuthRequest, res: Response) => {
+export const getJobs = async (req: AuthRequest, res: Response): Promise<Response> => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -52,10 +53,11 @@ export const getJobs = async (req: AuthRequest, res: Response) => {
       .sort({ createdAt: -1 })
       .limit(parseInt(limit as string));
 
-    res.json({ jobs });
-  } catch (error: any) {
-    logger.error("Failed to get jobs", { error: error.message });
-    res.status(500).json({ error: "Failed to fetch jobs" });
+    return res.json({ jobs });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    logger.error("Failed to get jobs", { error: errorMessage });
+    return res.status(500).json({ error: "Failed to fetch jobs" });
   }
 };
 

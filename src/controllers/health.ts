@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import mongoose from "mongoose";
-import { env } from "../config/env";
 import { logger } from "../lib/logger";
 import redis from "../lib/redis";
 

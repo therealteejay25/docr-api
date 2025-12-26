@@ -28,7 +28,6 @@ export const applyPatchWorker = new Worker(
     const {
       repoId,
       userId,
-      webhookEventId,
       patches,
       summary,
       coverageScore,
@@ -58,9 +57,10 @@ export const applyPatchWorker = new Worker(
           files: patches.map((p) => p.file),
           timestamp: Date.now(),
         });
-      } catch (e) {
+      } catch (e: unknown) {
+        const errorMessage = e instanceof Error ? e.message : "Unknown error";
         logger.warn("Failed to publish patch applying event", {
-          error: e.message,
+          error: errorMessage,
         });
       }
 
@@ -116,10 +116,11 @@ export const applyPatchWorker = new Worker(
             path: patchData.file,
             content: newContent,
           });
-        } catch (error) {
+        } catch (error: unknown) {
+          const errorMessage = error instanceof Error ? error.message : "Unknown error";
           logger.error("Failed to apply patch", {
             file: patchData.file,
-            error: error.message,
+            error: errorMessage,
           });
           // Continue with other files
         }
@@ -158,9 +159,10 @@ export const applyPatchWorker = new Worker(
           commitUrl: writeResult.commitUrl,
           timestamp: Date.now(),
         });
-      } catch (e) {
+      } catch (e: unknown) {
+        const errorMessage = e instanceof Error ? e.message : "Unknown error";
         logger.warn("Failed to publish patch written event", {
-          error: e.message,
+          error: errorMessage,
         });
       }
 
@@ -187,7 +189,7 @@ export const applyPatchWorker = new Worker(
 
       // Trigger email notification
       const user = await User.findById(userId);
-      if (user && repo.settings.emailNotifications) {
+      if (user && repo.settings?.emailNotifications) {
         await addJob(sendEmailQueue, "send_email", {
           userId,
           repoId,
@@ -228,11 +230,12 @@ export const applyPatchWorker = new Worker(
         filesWritten: filesToWrite.length,
         duration,
       });
-    } catch (error) {
+    } catch (error: unknown) {
       const duration = Date.now() - startTime;
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to apply patches", {
         jobId: job.id,
-        error: error.message,
+        error: errorMessage,
         duration,
       });
 
@@ -240,7 +243,7 @@ export const applyPatchWorker = new Worker(
         { jobId: job.id },
         {
           status: "failed",
-          error: error.message,
+          error: errorMessage,
           completedAt: new Date(),
           duration,
         }
@@ -255,13 +258,14 @@ export const applyPatchWorker = new Worker(
             userId,
             email: user.email,
             repoName: repo.fullName,
-            error: error.message,
+            error: errorMessage,
             jobId: job.id,
           });
         }
-      } catch (emailError) {
+      } catch (emailError: unknown) {
+        const emailErrorMessage = emailError instanceof Error ? emailError.message : "Unknown error";
         logger.error("Failed to send error email", {
-          error: emailError.message,
+          error: emailErrorMessage,
         });
       }
 

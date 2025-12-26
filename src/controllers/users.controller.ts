@@ -3,7 +3,7 @@ import { AuthRequest } from "../middleware/auth";
 import { User } from "../models/User";
 import { logger } from "../lib/logger";
 
-export const getUser = async (req: AuthRequest, res: Response) => {
+export const getUser = async (req: AuthRequest, res: Response): Promise<Response> => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -17,7 +17,7 @@ export const getUser = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    res.json({
+    return res.json({
       user: {
         id: user._id,
         name: user.name,
@@ -26,16 +26,17 @@ export const getUser = async (req: AuthRequest, res: Response) => {
         githubId: user.githubId,
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     logger.error("Failed to get user", {
       userId: req.user?.userId,
-      error: error.message,
+      error: errorMessage,
     });
-    res.status(500).json({ error: "Failed to get user" });
+    return res.status(500).json({ error: "Failed to get user" });
   }
 };
 
-export const getSettings = async (req: AuthRequest, res: Response) => {
+export const getSettings = async (req: AuthRequest, res: Response): Promise<Response> => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -47,7 +48,7 @@ export const getSettings = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    res.json({
+    return res.json({
       settings: user.settings || {
         emailNotifications: true,
         weeklyReport: true,
@@ -55,16 +56,17 @@ export const getSettings = async (req: AuthRequest, res: Response) => {
         slackIntegration: false,
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     logger.error("Failed to get settings", {
       userId: req.user?.userId,
-      error: error.message,
+      error: errorMessage,
     });
-    res.status(500).json({ error: "Failed to get settings" });
+    return res.status(500).json({ error: "Failed to get settings" });
   }
 };
 
-export const updateSettings = async (req: AuthRequest, res: Response) => {
+export const updateSettings = async (req: AuthRequest, res: Response): Promise<Response> => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -86,15 +88,16 @@ export const updateSettings = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    res.json({
+    return res.json({
       settings: user.settings,
       message: "Settings updated successfully",
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     logger.error("Failed to update settings", {
       userId: req.user?.userId,
-      error: error.message,
+      error: errorMessage,
     });
-    res.status(500).json({ error: "Failed to update settings" });
+    return res.status(500).json({ error: "Failed to update settings" });
   }
 };

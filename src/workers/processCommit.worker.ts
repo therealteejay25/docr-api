@@ -34,9 +34,10 @@ export const processCommitWorker = new Worker(
           commitSha,
           timestamp: Date.now(),
         });
-      } catch (e) {
+      } catch (e: unknown) {
+        const errorMessage = e instanceof Error ? e.message : "Unknown error";
         logger.warn("Failed to publish commit processing event", {
-          error: e.message,
+          error: errorMessage,
         });
       }
 
@@ -186,11 +187,12 @@ export const processCommitWorker = new Worker(
         commitSha,
         duration,
       });
-    } catch (error) {
+    } catch (error: unknown) {
       const duration = Date.now() - startTime;
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to process commit", {
         jobId: job.id,
-        error: error.message,
+        error: errorMessage,
         duration,
       });
 
@@ -198,7 +200,7 @@ export const processCommitWorker = new Worker(
         { jobId: job.id },
         {
           status: "failed",
-          error: error.message,
+          error: errorMessage,
           completedAt: new Date(),
           duration,
         }

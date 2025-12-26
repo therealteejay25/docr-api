@@ -83,10 +83,11 @@ export class WriterService {
         repoName,
         branch,
       });
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to write files", {
         repoId: options.repoId,
-        error: error.message,
+        error: errorMessage,
       });
       throw error;
     }
@@ -104,7 +105,7 @@ export class WriterService {
           let sha: string | undefined = file.sha;
           if (!sha) {
             try {
-              const content = await githubService.getFileContent(
+              await githubService.getFileContent(
                 options.userId,
                 options.owner,
                 options.repoName,
@@ -163,12 +164,13 @@ export class WriterService {
               path: file.path,
             });
           }
-        } catch (error) {
+        } catch (error: unknown) {
+          const errorMessage = error instanceof Error ? error.message : "Unknown error";
           logger.error("Failed to write file", {
             userId: options.userId,
             repoId: options.repoId,
             path: file.path,
-            error: error.message,
+            error: errorMessage,
           });
           throw error;
         }
@@ -178,11 +180,12 @@ export class WriterService {
         success: true,
         commitSha: results[results.length - 1]?.commit?.sha,
       };
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to write files directly", {
         userId: options.userId,
         repoId: options.repoId,
-        error: error.message,
+        error: errorMessage,
       });
       throw error;
     }
@@ -207,12 +210,11 @@ export class WriterService {
       );
 
       // Write files to PR branch
-      const results = [];
       for (const file of options.files) {
         let sha: string | undefined = file.sha;
         if (!sha) {
           try {
-            const content = await githubService.getFileContent(
+            await githubService.getFileContent(
               options.userId,
               options.owner,
               options.repoName,
@@ -278,12 +280,13 @@ export class WriterService {
         success: true,
         prUrl: pr.html_url,
       };
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to create PR", {
         userId: options.userId,
         owner: options.owner,
         repo: options.repoName,
-        error: error.message,
+        error: errorMessage,
       });
       throw error;
     }

@@ -64,10 +64,11 @@ export const sendEmailWorker = new Worker(
         jobId: job.id,
         email: (job.data as any).email,
       });
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to send email", {
         jobId: job.id,
-        error: error.message,
+        error: errorMessage,
       });
       // Don't throw - email failures shouldn't fail the job
       // The queue will retry automatically

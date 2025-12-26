@@ -46,7 +46,9 @@ export interface DocGenerationOutput {
    Validation
 ======================= */
 
-function isValidDocOutput(o: any): o is DocGenerationOutput {
+// Unused validation function, may be used in future
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+function _isValidDocOutput(o: any): o is DocGenerationOutput {
   return (
     o &&
     Array.isArray(o.patches) &&

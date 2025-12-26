@@ -8,7 +8,7 @@ export const logger = createLogger({
     format.timestamp(),
     format.colorize(),
     format.printf(
-      (info: {timestamp: any, level: any, message: any}) =>
+      (info: any) =>
         `${info.timestamp} ${info.level} ${info.message}`
     )
   ),

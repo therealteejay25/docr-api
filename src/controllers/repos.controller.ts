@@ -7,21 +7,22 @@ import { encrypt } from "../utils/encryption";
 import { logger } from "../lib/logger";
 import { env } from "../config/env";
 
-export const listRepos = async (req: AuthRequest, res: Response) => {
+export const listRepos = async (req: AuthRequest, res: Response): Promise<Response> => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
     }
 
     const repos = await githubService.getUserRepos(req.user.userId);
-    res.json({ repos });
-  } catch (error: any) {
-    logger.error("Failed to list repos", { error: error.message });
-    res.status(500).json({ error: "Failed to fetch repositories" });
+    return res.json({ repos });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    logger.error("Failed to list repos", { error: errorMessage });
+    return res.status(500).json({ error: "Failed to fetch repositories" });
   }
 };
 
-export const connectRepo = async (req: AuthRequest, res: Response) => {
+export const connectRepo = async (req: AuthRequest, res: Response): Promise<Response> => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -93,33 +94,34 @@ export const connectRepo = async (req: AuthRequest, res: Response) => {
       },
     });
 
-    res.json({ repo });
-  } catch (error: any) {
+    return res.json({ repo });
+  } catch (error: unknown) {
+    const err = error as { status?: number; message?: string; response?: { data?: unknown } };
     logger.error("Failed to connect repo", { 
       userId: req.user?.userId,
-      error: error.message,
-      status: error.status,
-      response: error.response?.data 
+      error: err.message || "Unknown error",
+      status: err.status,
+      response: err.response?.data 
     });
     
     // Provide more specific error messages
-    if (error.status === 401 || error.status === 403) {
-      return res.status(error.status).json({ 
+    if (err.status === 401 || err.status === 403) {
+      return res.status(err.status).json({ 
         error: "GitHub authentication failed - check token has repo and admin:repo_hook scopes" 
       });
     }
     
-    if (error.message?.includes("webhook")) {
+    if (err.message?.includes("webhook")) {
       return res.status(422).json({ 
-        error: `Webhook creation failed: ${error.message}. Ensure webhook URL is accessible.` 
+        error: `Webhook creation failed: ${err.message}. Ensure webhook URL is accessible.` 
       });
     }
     
-    res.status(500).json({ error: "Failed to connect repository" });
+    return res.status(500).json({ error: "Failed to connect repository" });
   }
 };
 
-export const disconnectRepo = async (req: AuthRequest, res: Response) => {
+export const disconnectRepo = async (req: AuthRequest, res: Response): Promise<Response> => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -152,28 +154,30 @@ export const disconnectRepo = async (req: AuthRequest, res: Response) => {
     // Delete repo
     await Repo.findByIdAndDelete(repoId);
 
-    res.json({ message: "Repository disconnected" });
-  } catch (error: any) {
-    logger.error("Failed to disconnect repo", { error: error.message });
-    res.status(500).json({ error: "Failed to disconnect repository" });
+    return res.json({ message: "Repository disconnected" });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    logger.error("Failed to disconnect repo", { error: errorMessage });
+    return res.status(500).json({ error: "Failed to disconnect repository" });
   }
 };
 
-export const getRepos = async (req: AuthRequest, res: Response) => {
+export const getRepos = async (req: AuthRequest, res: Response): Promise<Response> => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
     }
 
     const repos = await Repo.find({ userId: req.user.userId, isActive: true });
-    res.json({ repos });
-  } catch (error: any) {
-    logger.error("Failed to get repos", { error: error.message });
-    res.status(500).json({ error: "Failed to fetch repositories" });
+    return res.json({ repos });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    logger.error("Failed to get repos", { error: errorMessage });
+    return res.status(500).json({ error: "Failed to fetch repositories" });
   }
 };
 
-export const updateRepoSettings = async (req: AuthRequest, res: Response) => {
+export const updateRepoSettings = async (req: AuthRequest, res: Response): Promise<Response> => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -196,10 +200,11 @@ export const updateRepoSettings = async (req: AuthRequest, res: Response) => {
       await repo.save();
     }
 
-    res.json({ repo });
-  } catch (error: any) {
-    logger.error("Failed to update repo settings", { error: error.message });
-    res.status(500).json({ error: "Failed to update settings" });
+    return res.json({ repo });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    logger.error("Failed to update repo settings", { error: errorMessage });
+    return res.status(500).json({ error: "Failed to update settings" });
   }
 };
 

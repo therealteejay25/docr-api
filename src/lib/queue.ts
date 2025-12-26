@@ -1,4 +1,4 @@
-import { Queue, Worker, QueueEvents } from "bullmq";
+import { Queue, QueueEvents } from "bullmq";
 import redis from "./redis";
 import { logger } from "./logger";
 
@@ -16,7 +16,6 @@ export const processCommitQueue = new Queue(QUEUE_NAMES.PROCESS_COMMIT, {
   connection: redis,
   defaultJobOptions: {
     attempts: 3,
-    timeout: 60000, // 60 second timeout
     backoff: {
       type: "exponential",
       delay: 2000,
@@ -35,7 +34,6 @@ export const generateDocsQueue = new Queue(QUEUE_NAMES.GENERATE_DOCS, {
   connection: redis,
   defaultJobOptions: {
     attempts: 3,
-    timeout: 120000, // 120 second timeout for AI operations
     backoff: {
       type: "exponential",
       delay: 3000,
@@ -47,7 +45,6 @@ export const applyPatchQueue = new Queue(QUEUE_NAMES.APPLY_PATCH, {
   connection: redis,
   defaultJobOptions: {
     attempts: 3,
-    timeout: 60000, // 60 second timeout
     backoff: {
       type: "exponential",
       delay: 2000,
@@ -59,7 +56,6 @@ export const sendEmailQueue = new Queue(QUEUE_NAMES.SEND_EMAIL, {
   connection: redis,
   defaultJobOptions: {
     attempts: 5,
-    timeout: 30000, // 30 second timeout
     backoff: {
       type: "exponential",
       delay: 5000,
@@ -73,7 +69,6 @@ export const recomputeCoverageQueue = new Queue(
     connection: redis,
     defaultJobOptions: {
       attempts: 2,
-      timeout: 45000, // 45 second timeout
       backoff: {
         type: "exponential",
         delay: 10000,

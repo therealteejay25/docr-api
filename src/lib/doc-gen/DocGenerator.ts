@@ -1,4 +1,4 @@
-import { ContextBuilder, ProjectAnalysis } from "./ContextBuilder";
+import { ContextBuilder } from "./ContextBuilder";
 import { PromptBuilder, DocGenerationInput } from "./PromptBuilder";
 import { aiService } from "../../services/ai.service";
 import { logger } from "../../lib/logger";

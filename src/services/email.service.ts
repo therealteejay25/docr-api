@@ -51,10 +51,11 @@ export class EmailService {
         messageId: (result as any).id,
         fullResult: JSON.stringify(result),
       });
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to send email", {
         to: data.to,
-        error: error.message,
+        error: errorMessage,
         errorDetails: error,
       });
       throw error;

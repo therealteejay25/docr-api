@@ -7,7 +7,7 @@ import { decrypt } from "../utils/encryption";
 import { logger } from "../lib/logger";
 import { env } from "../config/env";
 
-export const handleGitHubWebhook = async (req: Request, res: Response) => {
+export const handleGitHubWebhook = async (req: Request, res: Response): Promise<Response> => {
   const startTime = Date.now();
 
   try {
@@ -67,7 +67,7 @@ export const handleGitHubWebhook = async (req: Request, res: Response) => {
     });
 
     // Check if auto-update is enabled
-    if (!repo.settings.autoUpdate) {
+    if (!repo.settings?.autoUpdate) {
       logger.info("Auto-update disabled for repo", { repoId: repo._id });
       return res.status(200).json({ message: "Auto-update disabled" });
     }
@@ -189,13 +189,14 @@ export const handleGitHubWebhook = async (req: Request, res: Response) => {
     });
 
     // Always return 200 immediately
-    res.status(200).json({ message: "Webhook received" });
-  } catch (error) {
+    return res.status(200).json({ message: "Webhook received" });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     logger.error("Webhook processing failed", {
-      error: error.message,
+      error: errorMessage,
       duration: Date.now() - startTime,
     });
     // Still return 200 to prevent GitHub retries
-    res.status(200).json({ error: "Processing failed, will retry" });
+    return res.status(200).json({ error: "Processing failed, will retry" });
   }
 };

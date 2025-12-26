@@ -125,7 +125,7 @@ export class DiffService {
   validatePatchSafety(patch: string, originalContent: string): boolean {
     const lines = patch.split("\n");
     const deletions = lines.filter((l) => l.startsWith("-")).length;
-    const additions = lines.filter((l) => l.startsWith("+")).length;
+    // const additions = lines.filter((l) => l.startsWith("+")).length;
     const originalLines = originalContent.split("\n").length;
 
     // Safety checks

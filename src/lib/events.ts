@@ -6,8 +6,9 @@ export async function publishEvent(repoId: string, event: any) {
     const channel = `events:${repoId}`;
     await redis.publish(channel, JSON.stringify(event));
     logger.info("Published event", { repoId, eventType: event.type });
-  } catch (error) {
-    logger.error("Failed to publish event", { error: error.message });
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    logger.error("Failed to publish event", { error: errorMessage });
   }
 }
 

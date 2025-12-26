@@ -1,7 +1,7 @@
 import { Analytics } from "../models/Analytics";
 import { logger } from "../lib/logger";
 
-type MetricKey = "reposConnected" | "docsGenerated" | "creditsUsed" | "averageDiffSize" | "successRate" | "failureRate" | "webhooksReceived" | "patchesApplied" | "prsCreated";
+type MetricKey = "reposConnected" | "docsGenerated" | "creditsUsed" | "averageDiffSize" | "successRate" | "failureRate" | "webhooksReceived" | "patchesApplied" | "prsCreated" | "commitsPushed";
 
 export class AnalyticsService {
   async recordMetric(
@@ -81,6 +81,19 @@ export class AnalyticsService {
         });
       }
 
+      if (!analytics.metrics) {
+        analytics.metrics = {
+          reposConnected: 0,
+          docsGenerated: 0,
+          creditsUsed: 0,
+          averageDiffSize: 0,
+          successRate: 0,
+          failureRate: 0,
+          webhooksReceived: 0,
+          patchesApplied: 0,
+          prsCreated: 0,
+        };
+      }
       const total = analytics.metrics.successRate + analytics.metrics.failureRate + 1;
       if (success) {
         analytics.metrics.successRate += 1;

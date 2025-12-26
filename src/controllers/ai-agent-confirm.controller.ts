@@ -3,7 +3,7 @@ import { AuthRequest } from "../middleware/auth";
 import { logger } from "../lib/logger";
 
 // This controller handles confirmation responses from the UI
-export const handleConfirmation = async (req: AuthRequest, res: Response) => {
+export const handleConfirmation = async (req: AuthRequest, res: Response): Promise<Response> => {
   try {
     if (!req.user) {
       return res.status(401).json({ error: "Unauthorized" });
@@ -38,14 +38,15 @@ export const handleConfirmation = async (req: AuthRequest, res: Response) => {
       tool,
       args: modifiedArgs || args,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     logger.error("Confirmation handling failed", {
       userId: req.user?.userId,
-      error: error.message,
+      error: errorMessage,
     });
-    res.status(500).json({
+    return res.status(500).json({
       error: "Failed to process confirmation",
-      message: error.message,
+      message: errorMessage,
     });
   }
 };

@@ -30,13 +30,14 @@ export class GitHubService {
       const octokit = await this.getOctokit(userId);
       const response = await octokit.repos.getCommit({ owner, repo, ref: sha });
       return response.data;
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to get commit", {
         userId,
         owner,
         repo,
         sha,
-        error: error.message,
+        error: errorMessage,
       });
       throw error;
     }
@@ -62,14 +63,15 @@ export class GitHubService {
         head,
       });
       return response.data;
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to get commit diff", {
         userId,
         owner,
         repo,
         base,
         head,
-        error: error.message,
+        error: errorMessage,
       });
       throw error;
     }
@@ -108,15 +110,16 @@ export class GitHubService {
         "utf-8"
       );
       return content;
-    } catch (error) {
+    } catch (error: unknown) {
+      const err = error as { status?: number; message?: string };
       // Don't log 404 errors as they are expected when files don't exist
-      if (error.status !== 404) {
+      if (err.status !== 404) {
         logger.error("Failed to get file content", {
           userId,
           owner,
           repo,
           path,
-          error: error.message,
+          error: err.message || "Unknown error",
         });
       }
       throw error;
@@ -182,13 +185,14 @@ export class GitHubService {
       }
 
       return response.data;
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to update file", {
         userId,
         owner,
         repo,
         path,
-        error: error.message,
+        error: errorMessage,
       });
       throw error;
     }
@@ -229,14 +233,15 @@ export class GitHubService {
         newBranch,
         baseBranch,
       });
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to create branch", {
         userId,
         owner,
         repo,
         newBranch,
         baseBranch,
-        error: error.message,
+        error: errorMessage,
       });
       throw error;
     }
@@ -275,7 +280,8 @@ export class GitHubService {
       });
 
       return response.data;
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to create pull request", {
         userId,
         owner,
@@ -283,7 +289,7 @@ export class GitHubService {
         title,
         head,
         base,
-        error: error.message,
+        error: errorMessage,
       });
       throw error;
     }
@@ -306,12 +312,13 @@ export class GitHubService {
       });
 
       return response.data;
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to get repository info", {
         userId,
         owner,
         repo,
-        error: error.message,
+        error: errorMessage,
       });
       throw error;
     }
@@ -344,13 +351,14 @@ export class GitHubService {
         date: commit.commit.author?.date,
         url: commit.html_url,
       }));
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Failed to get commits", {
         userId,
         owner,
         repo,
         branch,
-        error: error.message,
+        error: errorMessage,
       });
       throw error;
     }
@@ -377,17 +385,146 @@ export class GitHubService {
       });
 
       return Array.isArray(response.data) ? response.data : [response.data];
-    } catch (error) {
+    } catch (error: unknown) {
+      const err = error as { status?: number; message?: string };
       // Don't log 404 for missing paths
-      if (error.status !== 404) {
+      if (err.status !== 404) {
         logger.error("Failed to get repository structure", {
           userId,
           owner,
           repo,
           path,
-          error: error.message,
+          error: err.message || "Unknown error",
         });
       }
+      throw error;
+    }
+  }
+
+  /**
+   * Get user's repositories
+   */
+  async getUserRepos(userId: string): Promise<any[]> {
+    try {
+      const octokit = await this.getOctokit(userId);
+      const response = await octokit.repos.listForAuthenticatedUser({
+        per_page: 100,
+        sort: "updated",
+      });
+      return response.data;
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      logger.error("Failed to get user repos", {
+        userId,
+        error: errorMessage,
+      });
+      throw error;
+    }
+  }
+
+  /**
+   * Get repository information (alias for getRepository)
+   */
+  async getRepo(userId: string, owner: string, name: string): Promise<any> {
+    return this.getRepository(userId, owner, name);
+  }
+
+  /**
+   * Check if user has write access to a repository
+   */
+  async checkWriteAccess(
+    userId: string,
+    owner: string,
+    repo: string
+  ): Promise<boolean> {
+    try {
+      const octokit = await this.getOctokit(userId);
+      const response = await octokit.repos.get({
+        owner,
+        repo,
+      });
+      // Check permissions
+      return response.data.permissions?.push === true || response.data.permissions?.admin === true;
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      logger.error("Failed to check write access", {
+        userId,
+        owner,
+        repo,
+        error: errorMessage,
+      });
+      return false;
+    }
+  }
+
+  /**
+   * Create a webhook for a repository
+   */
+  async createWebhook(
+    userId: string,
+    owner: string,
+    repo: string,
+    url: string,
+    secret: string
+  ): Promise<any> {
+    try {
+      const octokit = await this.getOctokit(userId);
+      const response = await octokit.repos.createWebhook({
+        owner,
+        repo,
+        config: {
+          url,
+          content_type: "json",
+          secret,
+        },
+        events: ["push", "pull_request"],
+        active: true,
+      });
+      return response.data;
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      logger.error("Failed to create webhook", {
+        userId,
+        owner,
+        repo,
+        url,
+        error: errorMessage,
+      });
+      throw error;
+    }
+  }
+
+  /**
+   * Delete a webhook from a repository
+   */
+  async deleteWebhook(
+    userId: string,
+    owner: string,
+    repo: string,
+    webhookId: number
+  ): Promise<void> {
+    try {
+      const octokit = await this.getOctokit(userId);
+      await octokit.repos.deleteWebhook({
+        owner,
+        repo,
+        hook_id: webhookId,
+      });
+      logger.info("Webhook deleted successfully", {
+        userId,
+        owner,
+        repo,
+        webhookId,
+      });
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
+      logger.error("Failed to delete webhook", {
+        userId,
+        owner,
+        repo,
+        webhookId,
+        error: errorMessage,
+      });
       throw error;
     }
   }

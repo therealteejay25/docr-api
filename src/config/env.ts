@@ -41,6 +41,7 @@ export const env = {
   PORT: process.env.PORT!,
   MONGODB_URI: process.env.MONGODB_URI!,
   API_VERSION: process.env.API_VERSION || "v1",
+  API_URL: process.env.API_URL || "http://localhost:3001",
   ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS || "http://localhost:3000",
   RESEND_API_KEY: process.env.RESEND_API_KEY!,
   RESEND_FROM_EMAIL: process.env.RESEND_FROM_EMAIL!,
@@ -52,6 +53,7 @@ export const env = {
   GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID!,
   GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET!,
   GITHUB_REDIRECT_URI: process.env.GITHUB_REDIRECT_URI!,
+  GITHUB_WEBHOOK_SECRET: process.env.GITHUB_WEBHOOK_SECRET,
   REDIS_URL: process.env.REDIS_URL || "redis://127.0.0.1:6379",
   INTEGRATION_ENC_KEY: process.env.INTEGRATION_ENC_KEY!,
 };

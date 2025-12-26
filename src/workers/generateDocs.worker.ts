@@ -2,7 +2,7 @@ import { Worker, Job } from "bullmq";
 import redis from "../lib/redis";
 import { QUEUE_NAMES, applyPatchQueue, addJob } from "../lib/queue";
 import { DocGenerator } from "../lib/doc-gen/DocGenerator";
-import { Repo } from "../models/Repo";
+// import { Repo } from "../models/Repo";
 import { Job as JobModel } from "../models/Job";
 import { logger } from "../lib/logger";
 import { analyticsService } from "../services/analytics.service";
@@ -75,9 +75,10 @@ export const generateDocsWorker = new Worker(
           coverageScore: aiOutput.coverageScore,
           timestamp: Date.now(),
         });
-      } catch (e) {
+      } catch (e: unknown) {
+        const errorMessage = e instanceof Error ? e.message : "Unknown error";
         logger.warn("Failed to publish AI generated event", {
-          error: e.message,
+          error: errorMessage,
         });
       }
 
@@ -117,18 +118,19 @@ export const generateDocsWorker = new Worker(
 
       await analyticsService.recordMetric(userId, "docsGenerated", 1);
       logger.info("Generate docs job completed", { jobId: job.id, duration });
-    } catch (error) {
+    } catch (error: unknown) {
       const duration = Date.now() - startTime;
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       logger.error("Generate docs job failed", {
         jobId: job.id,
-        error: error.message,
+        error: errorMessage,
         duration,
       });
       await JobModel.findOneAndUpdate(
         { jobId: job.id },
         {
           status: "failed",
-          error: error.message,
+          error: errorMessage,
           completedAt: new Date(),
           duration,
         }

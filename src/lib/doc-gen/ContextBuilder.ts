@@ -22,8 +22,8 @@ export class ContextBuilder {
     if (!repo) throw new Error("Repo not found");
 
     const analysis: ProjectAnalysis = {
-      packageJson: repo.packageJson || null,
-      projectDescription: repo.description || null,
+      packageJson: (repo as any).packageJson || null,
+      projectDescription: (repo as any).description || null,
       mainFiles: [],
     };
 
@@ -78,8 +78,9 @@ export class ContextBuilder {
           // ignore failures
         }
       }
-    } catch (e) {
-      logger.warn("Failed to fetch repo structure", { error: e.message, repoId });
+    } catch (e: unknown) {
+      const errorMessage = e instanceof Error ? e.message : "Unknown error";
+      logger.warn("Failed to fetch repo structure", { error: errorMessage, repoId });
     }
 
     return analysis;

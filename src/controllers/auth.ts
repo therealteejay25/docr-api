@@ -10,10 +10,9 @@ import axios from "axios";
 import { logger } from "../lib/logger";
 
 const GITHUB_CLIENT_ID = env.GITHUB_CLIENT_ID!;
-const GITHUB_CLIENT_SECRET = env.GITHUB_CLIENT_SECRET!;
 const GITHUB_REDIRECT_URI = env.GITHUB_REDIRECT_URI!;
 
-export const redirectToGitHub = (req: Request, res: Response) => {
+export const redirectToGitHub = (_req: Request, res: Response): Response | void => {
   const scopes = githubScopes.join(",");
   try {
     const state = Math.random().toString(36).substring(7);
@@ -21,14 +20,15 @@ export const redirectToGitHub = (req: Request, res: Response) => {
       GITHUB_REDIRECT_URI
     )}&state=${state}`;
     res.redirect(url);
-  } catch (err) {
-    res
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : "Unknown error";
+    return res
       .status(500)
-      .json({ message: "Unable to get GitHub OAuth url", err: err.message });
+      .json({ message: "Unable to get GitHub OAuth url", err: errorMessage });
   }
 };
 
-export const gitHubCallback = async (req: Request, res: Response) => {
+export const gitHubCallback = async (req: Request, res: Response): Promise<Response | void> => {
   const code = req.query.code as string;
   if (!code) {
     return res.status(400).json({ message: "No code provided." });
@@ -91,15 +91,16 @@ export const gitHubCallback = async (req: Request, res: Response) => {
     res.redirect(
       `${frontendUrl}/auth/callback?token=${accessToken}&refresh=${refreshToken}`
     );
-  } catch (err) {
-    logger.error("GitHub OAuth callback failed", { error: err.message });
-    res
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : "Unknown error";
+    logger.error("GitHub OAuth callback failed", { error: errorMessage });
+    return res
       .status(500)
-      .json({ message: "Authentication failed", error: err.message });
+      .json({ message: "Authentication failed", error: errorMessage });
   }
 };
 
-export const refreshToken = async (req: Request, res: Response) => {
+export const refreshToken = async (req: Request, res: Response): Promise<Response> => {
   try {
     const { refreshToken: token } = req.body;
     if (!token) {
@@ -119,9 +120,9 @@ export const refreshToken = async (req: Request, res: Response) => {
       email: user.email,
     });
 
-    res.json({ accessToken });
+    return res.json({ accessToken });
   } catch (error) {
-    res.status(401).json({ error: "Invalid refresh token" });
+    return res.status(401).json({ error: "Invalid refresh token" });
   }
 };
 
