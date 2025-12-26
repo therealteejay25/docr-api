@@ -9,7 +9,6 @@ mongoose.connection.on("connected", () => {
   logger.info("MongoDB connection established");
 });
 
-// Suppress repeated disconnect warnings by only logging the first until we reconnect
 let _mongoDisconnectedWarned = false;
 mongoose.connection.on("disconnected", () => {
   if (_mongoDisconnectedWarned) return;
@@ -18,7 +17,6 @@ mongoose.connection.on("disconnected", () => {
 });
 
 mongoose.connection.on("reconnected", () => {
-  // Clear the warning flag so future disconnects will be reported again
   _mongoDisconnectedWarned = false;
   logger.info("MongoDB reconnected");
 });
