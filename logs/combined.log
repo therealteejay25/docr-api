@@ -9275,3 +9275,12 @@
 2026-01-08T03:54:09.756Z [32minfo[39m [6cfc4ace-b66c-4dff-b056-a28f7415f818] OPTIONS /api/v1/repos/connect - 204 (0ms)
 2026-01-08T03:54:09.757Z [32minfo[39m [3786096d-c3a8-43a4-8853-4df07bb23480] OPTIONS /api/v1/repos/connect - 204 (1ms)
 2026-01-08T03:54:11.812Z [32minfo[39m [65d42958-ed33-4023-a51b-0a96a4f4fd56] OPTIONS /api/v1/repos/ - 204 (1ms)
+2026-01-08T04:09:30.013Z [32minfo[39m All workers initialized
+2026-01-08T04:09:30.039Z [32minfo[39m All background workers started
+2026-01-08T04:09:30.051Z [32minfo[39m [development] Express server listening on http://localhost:9000
+2026-01-08T04:09:30.051Z [32minfo[39m API vv1: /api/v1/
+2026-01-08T04:09:30.051Z [32minfo[39m Health checks: http://localhost:9000/health/live
+2026-01-08T04:09:31.677Z [32minfo[39m Ingress established at: https://e2e964ec4970.ngrok-free.app
+2026-01-08T04:09:35.562Z [32minfo[39m Redis connecting
+2026-01-08T04:09:35.868Z [32minfo[39m Redis ready
+2026-01-08T04:09:37.866Z [32minfo[39m MongoDB connection established
