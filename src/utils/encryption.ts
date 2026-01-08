@@ -4,10 +4,10 @@ import { env } from "../config/env";
 const ALGORITHM = "aes-256-cbc";
 
 function getEncryptionKey(): Buffer {
-  const secret = env.JWT_SECRET;
+  const secret = env.INTEGRATION_ENC_KEY;
   if (!secret) {
     throw new Error(
-      "JWT_SECRET environment variable is required for encryption. Please set it in your .env file."
+      "INTEGRATION_ENC_KEY environment variable is required for encryption. Please set it in your .env file."
     );
   }
   return crypto.scryptSync(secret, "salt", 32);
