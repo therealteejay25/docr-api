@@ -9284,3 +9284,25 @@
 2026-01-08T04:09:35.562Z [32minfo[39m Redis connecting
 2026-01-08T04:09:35.868Z [32minfo[39m Redis ready
 2026-01-08T04:09:37.866Z [32minfo[39m MongoDB connection established
+2026-01-09T02:30:09.282Z [32minfo[39m All workers initialized
+2026-01-09T02:30:09.329Z [32minfo[39m All background workers started
+2026-01-09T02:30:09.358Z [32minfo[39m [development] Express server listening on http://localhost:9000
+2026-01-09T02:30:09.360Z [32minfo[39m API vv1: /api/v1/
+2026-01-09T02:30:09.364Z [32minfo[39m Health checks: http://localhost:9000/health/live
+2026-01-09T02:30:14.997Z [32minfo[39m Redis connecting
+2026-01-09T02:30:15.345Z [32minfo[39m Redis ready
+2026-01-09T02:30:17.034Z [32minfo[39m Ingress established at: https://dc4bfdfb9901.ngrok-free.app
+2026-01-09T02:30:32.658Z [32minfo[39m MongoDB connection established
+2026-01-09T02:33:06.120Z [32minfo[39m [9a1f5c2c-ff57-4840-b86b-72836ce4c356] GET /live - 200 (12ms)
+2026-01-09T02:33:06.640Z [33mwarn[39m [b66ed286-c491-45b5-a1ba-e4e1e8cec373] GET /favicon.ico - 404 (4ms)
+2026-01-16T06:08:59.144Z [32minfo[39m All workers initialized
+2026-01-16T06:08:59.181Z [32minfo[39m All background workers started
+2026-01-16T06:08:59.202Z [32minfo[39m [development] Express server listening on http://localhost:9000
+2026-01-16T06:08:59.204Z [32minfo[39m API vv1: /api/v1/
+2026-01-16T06:08:59.204Z [32minfo[39m Health checks: http://localhost:9000/health/live
+2026-01-16T06:09:04.541Z [32minfo[39m Redis connecting
+2026-01-16T06:09:05.361Z [32minfo[39m Redis ready
+2026-01-16T06:09:12.164Z [32minfo[39m Ingress established at: https://93697b7154d5.ngrok-free.app
+2026-01-16T06:09:14.734Z [32minfo[39m MongoDB connection established
+2026-01-16T06:09:24.827Z [32minfo[39m [d848fb16-86d1-42cb-acbf-54685c5f8373] GET /live - 200 (11ms)
+2026-01-16T06:09:25.152Z [33mwarn[39m [9fc6a725-1079-47bd-85ec-e3e16a70745d] GET /favicon.ico - 404 (2ms)
